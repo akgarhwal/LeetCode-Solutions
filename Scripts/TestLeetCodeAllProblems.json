@@ -1,0 +1,105 @@
+{
+    "user_name": "akgarhwal",
+    "num_solved": 316,
+    "num_total": 2519,
+    "ac_easy": 104,
+    "ac_medium": 174,
+    "ac_hard": 38,
+    "stat_status_pairs": [
+        {
+            "stat": {
+                "question_id": 41,
+                "question__article__live": true,
+                "question__article__slug": "first-missing-positive",
+                "question__article__has_video_solution": false,
+                "question__title": "First Missing Positive",
+                "question__title_slug": "first-missing-positive",
+                "question__hide": false,
+                "total_acs": 814988,
+                "total_submitted": 2227158,
+                "frontend_question_id": 41,
+                "is_new_question": false
+            },
+            "status": "ac",
+            "difficulty": {
+                "level": 3
+            },
+            "paid_only": false,
+            "is_favor": false,
+            "frequency": 0,
+            "progress": 0
+        },
+        {
+            "stat": {
+                "question_id": 1022,
+                "question__article__live": true,
+                "question__article__slug": "unique-paths-iii",
+                "question__article__has_video_solution": false,
+                "question__title": "Unique Paths III",
+                "question__title_slug": "unique-paths-iii",
+                "question__hide": false,
+                "total_acs": 149993,
+                "total_submitted": 185169,
+                "frontend_question_id": 980,
+                "is_new_question": false
+            },
+            "status": "ac",
+            "difficulty": {
+                "level": 3
+            },
+            "paid_only": false,
+            "is_favor": false,
+            "frequency": 0,
+            "progress": 0
+        },
+        {
+            "stat": {
+                "question_id": 2556,
+                "question__article__live": null,
+                "question__article__slug": null,
+                "question__article__has_video_solution": null,
+                "question__title": "Convert the Temperature",
+                "question__title_slug": "convert-the-temperature",
+                "question__hide": false,
+                "total_acs": 42115,
+                "total_submitted": 46921,
+                "frontend_question_id": 2469,
+                "is_new_question": false
+            },
+            "status": "ac",
+            "difficulty": {
+                "level": 1
+            },
+            "paid_only": false,
+            "is_favor": false,
+            "frequency": 0,
+            "progress": 0
+        },
+        {
+            "stat": {
+                "question_id": 1,
+                "question__article__live": true,
+                "question__article__slug": "two-sum",
+                "question__article__has_video_solution": true,
+                "question__title": "Two Sum",
+                "question__title_slug": "two-sum",
+                "question__hide": false,
+                "total_acs": 8586015,
+                "total_submitted": 17456104,
+                "frontend_question_id": 1,
+                "is_new_question": false
+            },
+            "status": "ac",
+            "difficulty": {
+                "level": 1
+            },
+            "paid_only": false,
+            "is_favor": false,
+            "frequency": 0,
+            "progress": 0
+        }
+    ],
+    "frequency_high": 0,
+    "frequency_mid": 0,
+    "category_slug": "all"
+}

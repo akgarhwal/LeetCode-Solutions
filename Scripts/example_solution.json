@@ -1,0 +1,26 @@
+{
+    "submissions_dump": [
+        {
+            "id": 868506086,
+            "lang": "cpp",
+            "lang_name": "C++",
+            "time": "33 minutes",
+            "timestamp": 1672481357,
+            "status": 10,
+            "status_display": "Accepted",
+            "runtime": "6 ms",
+            "url": "/submissions/detail/868506086/",
+            "is_pending": "Not Pending",
+            "title": "Unique Paths III",
+            "memory": "7.1 MB",
+            "code": "class Solution {\npublic:\n\n    int R[4] = {-1, 0, 1, 0};\n    int C[4] = {0, 1, 0, -1};\n\n    bool canWalk(int x, int y, vector<vector<int>>& grid) {\n        if( x < 0 || y < 0 || x >= grid.size() || y >= grid[0].size()) {\n            return false;\n        }\n        if(grid[x][y] != -1 and grid[x][y] != 5) {\n            return true;\n        }\n        return false;\n    }\n\n    vector<pair<int,int>> path;\n\n    // void printPath(){\n    //     for(pair<int,int> pi : path){\n    //         cout<<\" (\"<<pi.first<<\", \"<<pi.second<<\") \";\n    //     }\n    //     cout<<endl;\n    // }\n\n    void solve(int x, int y, vector<vector<int>>& grid, int& pathLen, int curPathLen, int& ans) {\n        // cout<<curPathLen<<\"   \"<<grid[x][y]<<\"    \";\n        // printPath();\n        \n        for(int d = 0; d < 4; d++){\n            int nx = x + R[d];\n            int ny = y + C[d];\n\n            if(canWalk(nx, ny, grid)) {\n\n                if(curPathLen+1 == pathLen && grid[nx][ny] == 2){\n                    ans += 1;\n                    continue;\n                }\n\n                // path.push_back({nx,ny});\n\n                int temp = grid[nx][ny];\n                grid[nx][ny] = 5;\n                solve(nx, ny, grid, pathLen, curPathLen+1, ans);\n                grid[nx][ny] = temp;\n\n                // path.pop_back();\n            }\n        }\n    }\n    int uniquePathsIII(vector<vector<int>>& grid) {\n        int x, y, ans = 0, pathLen = 0;\n        int curPathLen = 0;\n        // path.clear();\n\n        for(int i = 0; i < grid.size(); i++) {\n            for(int j = 0; j < grid[0].size(); j++) {\n                if(grid[i][j] == 1) {\n                    x = i; y = j;\n                    grid[x][y] = 5; // 5 means already walk over this grid.\n                }\n                if(grid[i][j] == 0) {\n                    pathLen += 1;\n                }\n            }\n        }\n        pathLen += 1;\n        // path.push_back({x,y});\n        solve(x, y, grid, pathLen, curPathLen, ans);\n\n        return ans;\n    }\n};",
+            "compare_result": "111111111111111111111111111111111111111",
+            "title_slug": "unique-paths-iii",
+            "has_notes": false,
+            "notes": "",
+            "topic_tags": []
+        }
+    ],
+    "has_next": false,
+    "last_key": ""
+}
