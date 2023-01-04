@@ -16,9 +16,11 @@ def writeToFile(filename, content):
 def getFileExtensionFromLang(lang): 
     langToFileExtensionDict = {
         "cpp" : ".cpp",
-        "csharp": ".c#",
+        "golang": ".go",
+        "csharp": ".cs",
         "javascript": ".js",
-        "java": ".java"
+        "java": ".java",
+        "mssql": ".sql"
     }
     return langToFileExtensionDict[lang]
 
