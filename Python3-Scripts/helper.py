@@ -8,8 +8,8 @@ import constants as const
 # Helper Functions
 
 # Save the content to a file with the filename"
-def writeToFile(filename, content):
-    with open(f'{filename}', 'w') as f:
+def writeToFile(filePath, content):
+    with open(f'{filePath}', 'w') as f:
         f.write(content)
 
 # Get File Extension for Languages like .cpp for C++
@@ -28,12 +28,14 @@ def getFileName(submission, frontendQuestionId):
     title_slug = submission.get("title_slug")
     lang = submission.get("lang")
     lang_name = submission.get("lang_name")
+    status_display = submission.get("status_display")
 
-    fileName = "{0}{1}-{2}{3}".format(getSolutionDirPath(lang_name), str(frontendQuestionId), title_slug, getFileExtensionFromLang(lang))
+    fileName = "{0}{1}-{2}{3}".format(getSolutionDirPath(lang_name, status_display), str(frontendQuestionId), title_slug, getFileExtensionFromLang(lang))
     return fileName
 
-def getSolutionDirPath(lang_name):
-    relPath = "../Solutions/{0}/".format(lang_name)
+def getSolutionDirPath(lang_name, status_display):
+    status_display = status_display.replace(" ", "-")
+    relPath = "../Solutions/{0}/{1}/".format(lang_name,status_display)
     # Check whether the specified path exists or not
     isExist = os.path.exists(relPath)
     if not isExist:
@@ -146,9 +148,53 @@ def fetchSubmissionsForQuestion(titleSlug, offset = 0, limit = 100):
     jsonResponse = response.json()
     return jsonResponse
 
+def fetchRecentSubmissionsForQuestion(offset = 0, limit = 20, last_key=""):
+    """
+    {
+        "submissions_dump": [
+            {
+                "id": 869782280,
+                "lang": "cpp",
+                "lang_name": "C++",
+                "time": "4 days, 20 hours",
+                "timestamp": 1672673322,
+                "status": 11,
+                "status_display": "Wrong Answer",
+                "runtime": "N/A",
+                "url": "/submissions/detail/869782280/",
+                "is_pending": "Not Pending",
+                "title": "Remove Letter To Equalize Frequency",
+                "memory": "N/A",
+                "code": "class Solution {\npublic:\n    bool equalFrequency(string word) {\n        unordered_map<char,int> mp;\n        for(char ch: word){\n            mp[ch] += 1;\n        }\n        int mi = INT_MAX, mx =INT_MIN, sum = 0, chCount = 0;\n        for(auto kv : mp) {\n            \n            int count = kv.second;\n            cout<<kv.first<<\" - \"<<count<<endl;\n\n            mi = min(mi, count);\n            mx = max(mx, count);\n            sum += count;\n            chCount += 1;\n        }\n\n        if((mx-1 == mi and sum-1 == mi*chCount) or (mx == mi and mx == 1)) {\n            return true;\n        }\n        return false;\n    }\n};",
+                "compare_result": "1111111111111110111111111111111101011011101010101",
+                "title_slug": "remove-letter-to-equalize-frequency",
+                "has_notes": false,
+                "notes": "",
+                "topic_tags": []
+            },
+            ........ more items here
+        ],
+        "has_next": true,
+        "last_key": "%7B%22pk%22%3A%20%7B%22N%22%3A%20%22868754346%22%7D%2C%20%22dt%22%3A%20%7B%22S%22%3A%20%222023-01-01T00%3A14%3A15.533205%2B0000%22%7D%2C%20%22sid%22%3A%20%7B%22N%22%3A%20%222785630%22%7D%7D"
+    }
+    """
+    # Get the list of submissions for a title-slug
+    response = requests.get(    
+        const.SUBMISSIONS_API_ENDPOINT + "?offset={0}&limit={1}&lastkey={2}".format(offset, limit, last_key), 
+        headers = { "Cookie": auth.Cookie }
+    )
+    jsonResponse = response.json()
+    return jsonResponse
+
+
 def getSubmissionsDump(jsonRes):
     return jsonRes.get("submissions_dump")
 
+def getHasNext(resJson):
+    return resJson.get("has_next")
+
+def getLastKey(resJson):
+    return resJson.get("last_key")
 
 def getFirstAcceptedSubmission(submissionsDump):
     for submission in submissionsDump:
@@ -157,10 +203,15 @@ def getFirstAcceptedSubmission(submissionsDump):
     return None
 
 def processAndWriteSubmission(submission, frontendQuestionId):
+    filePath = getFileName(submission, frontendQuestionId)
+    if os.path.exists(filePath):
+        return False # Solution already present so do not process this submission
+    
     writeToFile(
-        getFileName(submission, frontendQuestionId), 
+        filePath, 
         getCotentWithCodeAndMetaData(submission, frontendQuestionId)
     )
+    return True
 
 
 def getCotentWithCodeAndMetaData(submission, frontendQuestionId):
