@@ -79,7 +79,8 @@ def main(argv):
             break
         
         # wait for 1 seconds
-        time.sleep(1)
+        print("\n\n Wait for 5 seconds...\n\n")
+        time.sleep(5)
         fetchNextPage = helper.getHasNext(responseJson)
         # fetchNextPage = False
         if fetchNextPage:

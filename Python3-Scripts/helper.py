@@ -16,13 +16,17 @@ def writeToFile(filePath, content):
 def getFileExtensionFromLang(lang): 
     langToFileExtensionDict = {
         "cpp" : ".cpp",
+        "c": ".c",
         "golang": ".go",
         "csharp": ".cs",
         "javascript": ".js",
         "java": ".java",
         "mssql": ".sql"
     }
-    return langToFileExtensionDict[lang]
+    if lang in langToFileExtensionDict :
+        return langToFileExtensionDict[lang]
+    
+    return "."+lang
 
 def getFileName(submission, frontendQuestionId):
     title_slug = submission.get("title_slug")
