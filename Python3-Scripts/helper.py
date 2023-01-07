@@ -29,7 +29,7 @@ def getFileName(submission, frontendQuestionId):
     lang = submission.get("lang")
     lang_name = submission.get("lang_name")
 
-    fileName = "{0}{1}-{2}-{3}".format(getSolutionDirPath(lang_name), str(frontendQuestionId), title_slug, getFileExtensionFromLang(lang))
+    fileName = "{0}{1}-{2}{3}".format(getSolutionDirPath(lang_name), str(frontendQuestionId), title_slug, getFileExtensionFromLang(lang))
     return fileName
 
 def getSolutionDirPath(lang_name):
