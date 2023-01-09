@@ -39,16 +39,20 @@ def main(argv):
     fetchMetaDataAndPrepareDict()
     fetchAll = False
     argsValue = ""
-    opts, args = getopt.getopt(argv,"ha:")
+    opts, args = getopt.getopt(argv,"hc:")
     for opt, arg in opts:
         if opt == '-h':
-            print ('leetcode-submissions-downloader.py -a <True|False>')
+            print ('leetcode-submissions-downloader.py -c <Process recent number of submissions>')
             sys.exit()
-        elif opt in ("-a"):
+        elif opt in ("-c"):
             argsValue = arg
-
-    fetchAll = argsValue == "True"
-    print("Fetch All: {0}".format(fetchAll))
+    
+    try:
+        processSubmissionCount = int(argsValue)
+        print("Processing max submission sount: {0}".format(processSubmissionCount))
+    except:
+        processSubmissionCount = -1
+        print("Will fetch all submissions...")
 
     time.sleep(3)
     count = 0
@@ -66,18 +70,13 @@ def main(argv):
             print("Start processing title-slug: " + title_slug)
             isProcessed = processSubmission(submission)
             if not isProcessed:
-                isNewSubmissionsProcessed = True
                 print("Queestion: {0} is not processed becuase file already present".format(title_slug))
-
-            if isNewSubmissionsProcessed and not fetchAll:
-                break;
 
             print("Completed processing title-slug: " + title_slug)
         
-        if not fetchAll and isNewSubmissionsProcessed:
-            print("Fetching new sobmissions is completed.")
+        if processSubmissionCount > 0 and count > processSubmissionCount :
             break
-        
+
         # wait for 1 seconds
         print("\n\n Wait for 5 seconds...\n\n")
         time.sleep(5)

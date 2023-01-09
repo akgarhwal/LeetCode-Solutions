@@ -4,7 +4,7 @@
 cd ~/github/LeetCode-Solutions/scripts/
 
 echo -e "\n\n" >> leetcode-submissions-downloader.log
-python3 leetcode-submissions-downloader.py >> leetcode-submissions-downloader.log
+python3 leetcode-submissions-downloader.py -c 200 >> leetcode-submissions-downloader.log
 
 
 # Now do git steps
@@ -16,4 +16,5 @@ today=`date`
 git commit -m "Submission added on $today"
 git push
 
-echo -e "'git push' Completed\n\n" >> scripts/leetcode-submissions-downloader.log
+echo "Completed for $today."
+
