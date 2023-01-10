@@ -18,6 +18,7 @@ LeetCode Username: [akgarhwal](https://leetcode.com/akgarhwal/)
 ## Structure
 
 * Solutions  
+  * C  
   * C++  
   * C#
   * Go
