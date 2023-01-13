@@ -2,7 +2,7 @@
 
 # Get Latest changes from remote repo
 cd ~/github/LeetCode-Solutions/
-git pull origin main
+git pull
 
 # Run python3 script to fetch recent subsmissons
 cd scripts/
@@ -17,7 +17,6 @@ cd ../
 today=`date`
 branch=`date +"%d-%m-%Y"`
 
-git pull 
 git checkout -b "leetcode-$branch"
 
 git add scripts/*.log
